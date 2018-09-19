@@ -44,14 +44,14 @@ class GossipingSpreader {
     }
 
     private void exchangeGossips(Map<Integer, List<BusRoute>> sameStopGroups) {
-        sameStopGroups.forEach((stop, busRoutes) -> {
-            if (busRoutes.size() > 1) {
-                exchangeGossipsWith(busRoutes);
+        sameStopGroups.forEach((stop, busRoutesAtTheSameStop) -> {
+            if (busRoutesAtTheSameStop.size() > 1) {
+                exchangeGossips(busRoutesAtTheSameStop);
             }
         });
     }
 
-    private void exchangeGossipsWith(List<BusRoute> busRoutes) {
+    private void exchangeGossips(List<BusRoute> busRoutes) {
         val combinedGossips = busRoutes.stream()
                 .map(busRoute -> gossips.get(busRoute.getDriver()))
                 .flatMap(Collection::stream)
