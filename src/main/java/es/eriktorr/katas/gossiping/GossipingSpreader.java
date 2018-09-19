@@ -35,7 +35,7 @@ class GossipingSpreader {
     private boolean areAllGossipsSpreadAt(int minute) {
         val driversGroupedByStop = groupDriversByStopAt(minute);
         exchangeGossips(driversGroupedByStop);
-        return areAllDriversOnBoardWithTheLatestsGossips();
+        return areAllDriversOnBoardWithTheLatestGossips();
     }
 
     private Map<Integer, List<BusRoute>> groupDriversByStopAt(int minute) {
@@ -59,7 +59,7 @@ class GossipingSpreader {
         busRoutes.forEach(busRoute -> gossips.put(busRoute.getDriver(), combinedGossips));
     }
 
-    private boolean areAllDriversOnBoardWithTheLatestsGossips() {
+    private boolean areAllDriversOnBoardWithTheLatestGossips() {
         val driverWhoDoesNotHaveAllTheGossips = gossips.values().stream()
                 .filter(currentGossips -> currentGossips.size() != routes.size())
                 .findFirst();
