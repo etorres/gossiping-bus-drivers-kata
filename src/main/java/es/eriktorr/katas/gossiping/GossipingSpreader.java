@@ -21,7 +21,7 @@ class GossipingSpreader {
 
     GossipingSpreader(List<BusRoute> routes) {
         this.routes = routes;
-        this.gossips = initialGossips(routes);
+        this.gossips = initialGossipsFrom(routes);
     }
 
     String stopsNeededToSpreadAllTheGossips() {
@@ -60,13 +60,11 @@ class GossipingSpreader {
     }
 
     private boolean areAllDriversOnBoardWithTheLatestGossips() {
-        val driverWhoDoesNotHaveAllTheGossips = gossips.values().stream()
-                .filter(currentGossips -> currentGossips.size() != routes.size())
-                .findFirst();
-        return !driverWhoDoesNotHaveAllTheGossips.isPresent();
+        return gossips.values().stream()
+                .allMatch(currentGossips -> currentGossips.size() == routes.size());
     }
 
-    private Map<BusDriver, Set<Gossip>> initialGossips(List<BusRoute> routes) {
+    private Map<BusDriver, Set<Gossip>> initialGossipsFrom(List<BusRoute> routes) {
         return routes.stream()
                 .map(route -> new SimpleEntry<>(route.getDriver(), initialsGossipFor(route.getDriverName())))
                 .collect(Collectors.toMap(SimpleEntry::getKey, SimpleEntry::getValue));
