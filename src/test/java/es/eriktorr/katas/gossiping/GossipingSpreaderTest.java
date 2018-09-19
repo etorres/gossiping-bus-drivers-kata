@@ -22,7 +22,7 @@ public class GossipingSpreaderTest {
                         new BusRoute(BUS_DRIVER_JOHN, Arrays.asList(4, 2, 3, 4, 5))
                 )
         );
-        assertThat(gossipingSpreader.stopsNeededToSpreadAllTheGossips()).isEqualTo("5");
+        assertThat(gossipingSpreader.stopsNeededToSpreadAllTheGossips()).isEqualTo("4");
     }
 
     @Test public void

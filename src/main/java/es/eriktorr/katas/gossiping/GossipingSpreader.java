@@ -3,9 +3,14 @@ package es.eriktorr.katas.gossiping;
 import lombok.val;
 
 import java.util.AbstractMap.SimpleEntry;
-import java.util.*;
+import java.util.Collection;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
+
+import static es.eriktorr.katas.gossiping.Gossip.initialsGossipFor;
 
 class GossipingSpreader {
 
@@ -16,9 +21,7 @@ class GossipingSpreader {
 
     GossipingSpreader(List<BusRoute> routes) {
         this.routes = routes;
-        this.gossips = routes.stream()
-                .map(route -> new SimpleEntry<>(route.getDriver(), initialGossipFrom(route.getDriverName())))
-                .collect(Collectors.toMap(SimpleEntry::getKey, SimpleEntry::getValue));
+        this.gossips = initialGossips(routes);
     }
 
     String stopsNeededToSpreadAllTheGossips() {
@@ -47,8 +50,10 @@ class GossipingSpreader {
         return !driverWhoDoesNotHaveAllTheGossips.isPresent();
     }
 
-    private Set<Gossip> initialGossipFrom(String driverName) {
-        return new HashSet<>(Collections.singletonList(new Gossip(driverName + "' gossip")));
+    private Map<BusDriver, Set<Gossip>> initialGossips(List<BusRoute> routes) {
+        return routes.stream()
+                .map(route -> new SimpleEntry<>(route.getDriver(), initialsGossipFor(route.getDriverName())))
+                .collect(Collectors.toMap(SimpleEntry::getKey, SimpleEntry::getValue));
     }
 
 }
