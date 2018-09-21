@@ -10,7 +10,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-import static es.eriktorr.katas.gossiping.Gossip.initialsGossipFor;
+import static es.eriktorr.katas.gossiping.Gossip.initialGossipsFor;
 
 class GossipingSpreader {
 
@@ -44,11 +44,9 @@ class GossipingSpreader {
     }
 
     private void exchangeGossips(Map<Integer, List<BusRoute>> sameStopGroups) {
-        sameStopGroups.forEach((stop, busRoutesAtTheSameStop) -> {
-            if (busRoutesAtTheSameStop.size() > 1) {
-                exchangeGossips(busRoutesAtTheSameStop);
-            }
-        });
+        sameStopGroups.values().stream()
+                .filter(sameStopGroup -> !sameStopGroup.isEmpty())
+                .forEach(this::exchangeGossips);
     }
 
     private void exchangeGossips(List<BusRoute> busRoutes) {
@@ -66,7 +64,7 @@ class GossipingSpreader {
 
     private Map<BusDriver, Set<Gossip>> initialGossipsFrom(List<BusRoute> routes) {
         return routes.stream()
-                .map(route -> new SimpleEntry<>(route.getDriver(), initialsGossipFor(route.getDriverName())))
+                .map(route -> new SimpleEntry<>(route.getDriver(), initialGossipsFor(route.getDriverName())))
                 .collect(Collectors.toMap(SimpleEntry::getKey, SimpleEntry::getValue));
     }
 

@@ -11,7 +11,7 @@ class Gossip {
 
     private final String content;
 
-    static Set<Gossip> initialsGossipFor(String driverName) {
+    static Set<Gossip> initialGossipsFor(String driverName) {
         return new HashSet<>(Collections.singletonList(new Gossip(driverName + "'s gossip")));
     }
 
