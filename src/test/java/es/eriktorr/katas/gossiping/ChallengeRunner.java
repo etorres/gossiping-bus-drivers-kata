@@ -1,22 +1,25 @@
 package es.eriktorr.katas.gossiping;
 
+import lombok.Value;
 import lombok.val;
 
 import java.util.Arrays;
 import java.util.stream.Stream;
 
-public class Challenge {
+public class ChallengeRunner {
 
     public static void main(String[] args) {
-        Stream.of(challenge1(), challenge2()).forEach(gossipingSpreader -> {
+        Stream.of(challenge1(), challenge2()).forEach(challenge -> {
+                    val challengeName = challenge.getName();
+                    val gossipingSpreader = challenge.getGossipingSpreader();
                     val stopsOrNever = gossipingSpreader.stopsNeededToSpreadAllTheGossips();
-                    System.out.println("Gossips are spread after: " + stopsOrNever);
+                    System.out.println(String.format("In challenge %s gossips are spread at %s", challengeName, stopsOrNever));
                 }
         );
     }
 
-    private static GossipingSpreader challenge1() {
-        return new GossipingSpreader(
+    private static Challenge challenge1() {
+        return new Challenge("Small city", new GossipingSpreader(
                 Arrays.asList(
                         new BusRoute(new BusDriver("Olivia"), Arrays.asList(7, 11, 2, 2, 4, 8, 2, 2)),
                         new BusRoute(new BusDriver("Sophia"), Arrays.asList(3, 0, 11, 8)),
@@ -26,11 +29,11 @@ public class Challenge {
                         new BusRoute(new BusDriver("Emily"), Arrays.asList(3, 6, 8, 9)),
                         new BusRoute(new BusDriver("Isabella"), Arrays.asList(4, 2, 11, 3, 3))
                 )
-        );
+        ));
     }
 
-    private static GossipingSpreader challenge2() {
-        return new GossipingSpreader(
+    private static Challenge challenge2() {
+        return new Challenge("Large city", new GossipingSpreader(
                 Arrays.asList(
                         new BusRoute(new BusDriver("Noah"), Arrays.asList(12, 23, 15, 2, 8, 20, 21, 3, 23, 3, 27, 20, 0)),
                         new BusRoute(new BusDriver("Leo"), Arrays.asList(21, 14, 8, 20, 10, 0, 23, 3, 24, 23, 0, 19, 14, 12, 10, 9, 12, 12, 11, 6, 27, 5)),
@@ -47,7 +50,13 @@ public class Challenge {
                         new BusRoute(new BusDriver("Ethan"), Arrays.asList(24, 29, 4, 17, 2, 0, 8, 19, 11, 28, 13, 4, 16, 5, 15, 25, 16, 5, 6, 1, 0, 19, 7, 4, 6)),
                         new BusRoute(new BusDriver("Freya"), Arrays.asList(16, 25, 15, 17, 20, 27, 1, 11, 1, 18, 14, 23, 27, 25, 26, 17, 1))
                 )
-        );
+        ));
+    }
+
+    @Value
+    private static class Challenge {
+        private final String name;
+        private final GossipingSpreader gossipingSpreader;
     }
 
 }
