@@ -25,11 +25,16 @@ class GossipingSpreader {
     }
 
     String stopsNeededToSpreadAllTheGossips() {
-        val stops = IntStream.range(0, MINUTES_MAXIMUM).sorted()
+        val minutes = IntStream.range(0, MINUTES_MAXIMUM).sorted()
                 .filter(this::areAllGossipsSpreadAt)
+                .map(this::stopsFrom)
                 .mapToObj(Integer::toString)
                 .findFirst();
-        return stops.orElse("never");
+        return minutes.orElse("never");
+    }
+
+    private int stopsFrom(int minutes) {
+        return minutes + 1;
     }
 
     private boolean areAllGossipsSpreadAt(int minute) {
