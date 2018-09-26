@@ -13,7 +13,7 @@ public class ChallengeRunner {
                     val challengeName = challenge.getName();
                     val gossipingSpreader = challenge.getGossipingSpreader();
                     val stopsOrNever = gossipingSpreader.stopsNeededToSpreadAllTheGossips();
-                    System.out.println(String.format("In challenge %s gossips are spread at %s", challengeName, stopsOrNever));
+                    System.out.println(String.format("In challenge \"%s\" gossips are spread at %s", challengeName, stopsOrNever));
                 }
         );
     }
