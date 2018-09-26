@@ -16,7 +16,7 @@ Initially, each driver knows only one gossip. This is represented as 3 different
 
 ![Initial stage](https://raw.githubusercontent.com/etorres/gossiping-bus-drivers-kata/master/images/Image2.png "Initial stage")
 
-At minute 0, Dave and Anna coincides in the stop 3, so they exchange all the gossips they know. This is represented as a merge operation where sets 
+At minute 0, Dave and Anna coincides in the stop 3, so they exchange all the gossips they know. This can be modelled using a merge operation where sets 
 
 ![Minute 0](https://raw.githubusercontent.com/etorres/gossiping-bus-drivers-kata/master/images/Image3.png "Minute 0")
 
