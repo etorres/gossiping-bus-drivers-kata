@@ -20,16 +20,30 @@ At minute 0, Dave meets Anna at stop 3 and they exchange all the gossips they kn
 
 ![Minute 0](https://raw.githubusercontent.com/etorres/gossiping-bus-drivers-kata/master/images/Image3.png "Minute 0")
 
-At minute 1, Anna meets John at stop 2 and she merges the set G1-G2 with G3:
+At minute 1, Anna meets John at stop 2 and she merges the set G1-G2 with G3. Now both John and Anna know all the gossips.
 
 ![Minute 1](https://raw.githubusercontent.com/etorres/gossiping-bus-drivers-kata/master/images/Image4.png "Minute 1")
 
-It's not until minute 4 that Anna meets Dave again at stop 3, and she merges G1-G2-G1 with G1:
+It's not until minute 4 that Anna meets Dave again at stop 3, and she merges G1-G2-G3 with G1-G2:
 
 ![Minute 4](https://raw.githubusercontent.com/etorres/gossiping-bus-drivers-kata/master/images/Image5.png "Minute 4")
 
-They need 4 minutes and 5 stops to spread all the gossips.
+In total, they need 4 minutes and 5 stops to spread all the gossips.
 
-## Rules
+## Additional Rules
 
+This kata becomes really interesting when you don't use any:
 
+* Loops: `for`, `while`, or `do-while`
+* Conditionals: `if-else`, or `switch`
+
+_Note:_ I have to use a ternary operator in one of the auxiliary classes of my solution. If you find a better way to do it, please share it.
+
+## Baby Steps
+
+If you are new to lambda expressions I would recommend you to do this kata in the following incremental steps:
+
+1. Use an internal iteration to step sequentially through the stops of the routes, until all the gossips are spread or until the end of the day, whatever comes first.
+2. Use a function to group drivers by stop.
+3. Use another function to exchange gossips with the drivers who meet at the same stop.
+4. A function will check that all drivers are on board with the latest gossips.
