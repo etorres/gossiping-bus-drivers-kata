@@ -50,7 +50,7 @@ class GossipingSpreader {
 
     private void exchangeGossips(Map<Integer, List<BusRoute>> sameStopGroups) {
         sameStopGroups.values().stream()
-                .filter(sameStopGroup -> !sameStopGroup.isEmpty())
+                .filter(sameStopGroup -> sameStopGroup.size() > 1)
                 .forEach(this::exchangeGossips);
     }
 
