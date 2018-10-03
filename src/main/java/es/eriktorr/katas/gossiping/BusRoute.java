@@ -10,4 +10,8 @@ class BusRoute {
     private final BusDriver driver;
     private final List<Integer> stops;
 
+    String getDriverName() {
+        return driver.getName();
+    }
+
 }
